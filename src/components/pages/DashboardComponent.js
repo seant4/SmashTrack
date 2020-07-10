@@ -1,19 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Dashboard.css';
 
-import { Navbar, Button, Container, Row, Col } from 'react-bootstrap'
+import { Navbar, Button, Container, Row, Col, Form , InputGroup, FormControl, ButtonGroup } from 'react-bootstrap'
+
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   } from 'recharts';
 
-  const data = [
-    {
-      name: 'Page A', event: 4000,
-    },
-  ];
+
+
+function handlePerformance(data, setData){
+    let name = "";
+    let result = 0;
+    confirmAlert({
+        customUI: ({ onClose }) => {
+          return (
+            <div className='custom-ui'>
+                <h1>Add Event Result</h1>
+                <Form>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Label></Form.Label>
+                    <Form.Control onChange={(e)=> {name=e.target.value}} placeholder="Name"></Form.Control>
+                    <br></br>
+                    <Form.Control placeholder="Result in Fraction form EX: 7/41" onChange={(e)=> {result=e.target.value}} />
+                </Form.Group>
+              </Form>
+              <Button onClick={() => handleClose(name, result, data, setData)} > Close </Button>
+            </div>
+          )
+        }
+      })
+}
+
+function handleClose(name, result, data, setData){
+    console.log(name + " " + result)
+    let event = {
+        name: name,
+        event: eval(result)
+    }
+    setData([...data, event])
+    console.log(data)
+}
 
 function DashboardComponent(props){
+    const [data, setData] = useState([])
     return(
         <>
             <Navbar bg="dark" variant="dark">
@@ -31,7 +64,7 @@ function DashboardComponent(props){
             >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
-                <YAxis />
+                <YAxis reversed/>
                 <Tooltip />
                 <Legend />
                 <Line type="monotone" dataKey="event" stroke="#82ca9d" />
@@ -44,7 +77,7 @@ function DashboardComponent(props){
                 <Button variant="secondary" size="lg" block>
                     Alerts
                 </Button>
-                <Button variant="secondary" size="lg" block>
+                <Button onClick={(e) => {handlePerformance(data, setData)}} variant="secondary" size="lg" block>
                     Performance
                 </Button>
                 <Button variant="secondary" size="lg" block>
