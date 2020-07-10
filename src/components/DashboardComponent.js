@@ -25,7 +25,7 @@ const DashboardComponent = (props) => (
     </text>
     <g transform="translate(34 332)">
       <g className="d" >
-        <rect className="l" width={154} height={100} rx={10} onClick={(e) => { props.onChange("Routines") }} />
+        <rect className="l" width={154} height={100} rx={10} />
         <rect className="g" x={0.5} y={0.5} width={153} height={99} rx={9.5} />
       </g>
     </g>
@@ -48,7 +48,7 @@ const DashboardComponent = (props) => (
       </g>
     </g>
     <text className="f" transform="translate(73 391)" >
-      <tspan x={0} y={0} onClick={function(){}} >
+      <tspan x={0} y={0} onClick={(e) => { props.onChange("Routines") }} >
         {"Routines"}
       </tspan>
     </text>

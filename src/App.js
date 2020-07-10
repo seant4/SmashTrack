@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import logo from './logo.svg';
-import Dashboard from './components/DashboardComponent'
-import Routines from './components/RoutinesComponent'
+import Dashboard from './components/pages/DashboardComponent'
+import Routines from './components/pages/RoutinesComponent'
+import List from './components/list/List'
 import './App.css';
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
   if(page === "Routines"){
     return (
       <div className="App">
-        <Routines />
+        <Routines page={page} onChange={(value) =>{setPage(value)}} />
       </div>
     );
   }else{
@@ -23,6 +24,7 @@ function App() {
         <Dashboard page={page} onChange={(value) => {setPage(value)}} />
       </div>
     )
+    
   }
 }
 
