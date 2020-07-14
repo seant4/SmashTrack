@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './List.css';
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -18,6 +18,19 @@ function List(){
 
     const [value, setValue] = useState(' ');
 
+    useEffect(()=>{
+        let updatedToDoList = [...toDoList]
+        for(let i in localStorage){
+            if(localStorage.getItem(i) !== null){
+                let item = {text: i,
+                            content: localStorage.getItem(i)}
+                updatedToDoList = [...updatedToDoList, item]
+            } 
+        }
+        setToDoList(updatedToDoList)
+    },[])
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         addToDo(value);
@@ -25,14 +38,23 @@ function List(){
     
     const addToDo = (text) => {
         const updatedToDoList = [...toDoList, { text }];
-        localStorage.setItem(text, "This is a test")
+        localStorage.setItem(text, text.content )
         setToDoList(updatedToDoList)
     };
 
     const handleDelete = (todo) =>{
         const filteredToDoList = toDoList.filter(currentToDoListValue => (currentToDoListValue !== todo));
         setToDoList(filteredToDoList)
+        localStorage.clear();
+        for(let i in filteredToDoList){
+            console.log(filteredToDoList[i].text, filteredToDoList[i].content)
+            localStorage.setItem(filteredToDoList[i].text, filteredToDoList[i].content)
+        }
     };
+
+    const handleSave = (todo) =>{
+        console.log(todo + " " + todo.text)
+    }
 
     const handleRoutine = (todo) =>{
         confirmAlert({
@@ -43,7 +65,7 @@ function List(){
                     <Form>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>My {todo.text} routine:</Form.Label>
-                        <Form.Control onChange={(e)=>todo.content=e.target.value} as="textarea" rows="15">{todo.content}</Form.Control>
+                        <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem(todo.text, todo.content)}} as="textarea" rows="15">{todo.content}</Form.Control>
                     </Form.Group>
                   </Form>
                   <Button>Close</Button>

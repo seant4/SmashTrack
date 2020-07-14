@@ -27,6 +27,29 @@
     <title>React App</title>
   </head>
   <body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAs2h898udHXOsENIkYcjzjRg1wuYxAXRo",
+    authDomain: "smashtrack-b1e21.firebaseapp.com",
+    databaseURL: "https://smashtrack-b1e21.firebaseio.com",
+    projectId: "smashtrack-b1e21",
+    storageBucket: "smashtrack-b1e21.appspot.com",
+    messagingSenderId: "936608043369",
+    appId: "1:936608043369:web:46438b10bb71be5d5a2df8",
+    measurementId: "G-ELK2W7CZ21"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
