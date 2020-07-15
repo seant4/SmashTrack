@@ -22,9 +22,11 @@ function List(){
         let updatedToDoList = [...toDoList]
         for(let i in localStorage){
             if(localStorage.getItem(i) !== null){
-                let item = {text: i,
-                            content: localStorage.getItem(i)}
-                updatedToDoList = [...updatedToDoList, item]
+                if(i.substr(0,1)==="r"){
+                    let item = {text: i.substring(1,i.length),
+                                content: localStorage.getItem(i)}
+                    updatedToDoList = [...updatedToDoList, item]
+                }
             } 
         }
         setToDoList(updatedToDoList)
@@ -38,17 +40,21 @@ function List(){
     
     const addToDo = (text) => {
         const updatedToDoList = [...toDoList, { text }];
-        localStorage.setItem(text, text.content )
+        localStorage.setItem("r" + text, text.content )
         setToDoList(updatedToDoList)
     };
 
     const handleDelete = (todo) =>{
         const filteredToDoList = toDoList.filter(currentToDoListValue => (currentToDoListValue !== todo));
         setToDoList(filteredToDoList)
-        localStorage.clear();
+        for(let i in localStorage){
+            if(i.substr(0,1) === "r"){
+                localStorage.removeItem(i)
+            }
+        }
         for(let i in filteredToDoList){
             console.log(filteredToDoList[i].text, filteredToDoList[i].content)
-            localStorage.setItem(filteredToDoList[i].text, filteredToDoList[i].content)
+            localStorage.setItem("r" + filteredToDoList[i].text, filteredToDoList[i].content)
         }
     };
 
@@ -65,7 +71,7 @@ function List(){
                     <Form>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>My {todo.text} routine:</Form.Label>
-                        <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem(todo.text, todo.content)}} as="textarea" rows="15">{todo.content}</Form.Control>
+                        <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("r" + todo.text, todo.content)}} as="textarea" rows="15">{todo.content}</Form.Control>
                     </Form.Group>
                   </Form>
                   <Button>Close</Button>
