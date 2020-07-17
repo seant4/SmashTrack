@@ -28,7 +28,7 @@ function handlePerformance(data, setData){
                     <Form.Control placeholder="Result in Fraction form EX: 7/41" onChange={(e)=> {result=e.target.value}} />
                 </Form.Group>
               </Form>
-              <Button onClick={() => handleClose(name, result, data, setData)} > Close </Button>
+              <Button onClick={() => {handleClose(name, result, data, setData); onClose()}} > Close </Button>
             </div>
           )
         }
@@ -36,14 +36,18 @@ function handlePerformance(data, setData){
 }
 
 function handleClose(name, result, data, setData){
-    console.log(name + " " + result)
-    let event = {
-        name: name,
-        event: eval(result)
+    if(result === 0){
+        ;
+    }else{
+        console.log(name + " " + result)
+        let event = {
+            name: name,
+            event: eval(result)
+        }
+        setData([...data, event])
+        localStorage.setItem("p" + name, result)
+        console.log(data)
     }
-    setData([...data, event])
-    localStorage.setItem("p" + name, result)
-    console.log(data)
 }
 
 function DashboardComponent(props){
