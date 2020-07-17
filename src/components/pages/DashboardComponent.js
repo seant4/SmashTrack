@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 
 import { Navbar, Button, Container, Row, Col, Form , InputGroup, FormControl, ButtonGroup } from 'react-bootstrap'
@@ -42,11 +42,24 @@ function handleClose(name, result, data, setData){
         event: eval(result)
     }
     setData([...data, event])
+    localStorage.setItem("p" + name, result)
     console.log(data)
 }
 
 function DashboardComponent(props){
     const [data, setData] = useState([])
+    useEffect(()=>{
+        let temp = []
+        for(let i in localStorage){
+            if(localStorage.getItem(i) !== null){
+                if(i.substr(0,1) === "p"){
+                    temp.push({name: i.substring(1, i.length),
+                                event: eval(localStorage.getItem(i))})
+                }
+            }
+        }
+        setData(temp)
+    },[])
     return(
         <>
             <Navbar bg="dark" variant="dark">
