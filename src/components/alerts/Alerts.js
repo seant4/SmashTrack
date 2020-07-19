@@ -56,23 +56,6 @@ function Alerts(){
         }
     };
 
-    const handleRoutine = (todo) =>{
-        confirmAlert({
-            customUI: ({ onClose }) => {
-              return (
-                <div className='custom-ui'>
-                    <h1>{todo.text} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; </h1>
-                    <Form>
-                        <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("r" + todo.text, todo.content)}} as="textarea" rows="15">{todo.content}</Form.Control>
-                    </Form.Group>
-                  </Form>
-                  <Button>Close</Button>
-                </div>
-              )
-            }
-          })
-    }
 
     return (
         <>

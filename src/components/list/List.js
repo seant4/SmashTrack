@@ -74,7 +74,7 @@ function List(){
                         <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("r" + todo.text, todo.content)}} as="textarea" rows="15">{todo.content}</Form.Control>
                     </Form.Group>
                   </Form>
-                  <Button>Close</Button>
+                  <Button onClick={() =>{ onClose() }}>Close</Button>
                 </div>
               )
             }
