@@ -37,7 +37,7 @@
 <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "AIzaSyAs2h898udHXOsENIkYcjzjRg1wuYxAXRo",
+    apiKey: process.env.REACT_APP_API_KEY,
     authDomain: "smashtrack-b1e21.firebaseapp.com",
     databaseURL: "https://smashtrack-b1e21.firebaseio.com",
     projectId: "smashtrack-b1e21",
@@ -45,7 +45,7 @@
     messagingSenderId: "936608043369",
     appId: "1:936608043369:web:46438b10bb71be5d5a2df8",
     measurementId: "G-ELK2W7CZ21"
-  };
+  };  
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
