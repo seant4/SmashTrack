@@ -71,11 +71,11 @@ function DashboardComponent(props){
             </Navbar>
 
             <LineChart
-                width={500}
-                height={300}
+                width={300}
+                height={150}
                 data={data}
                 margin={{
-                    top: 5, right: 30, left: 20, bottom: 5,
+                    top: 5, right: 0, left: 0, bottom: 5,
                 }}
                 style={{position: "relative", padding: "5px", margin: "0 auto"}}
             >
