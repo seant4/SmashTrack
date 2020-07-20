@@ -46,3 +46,27 @@ self.addEventListener('activate', event => {
     })
   );
 });
+
+
+let msg = []
+self.addEventListener('message', event =>{
+  msg = event.data
+  console.log("received: " + msg)
+})
+
+
+setInterval(()=>{
+  let now = new Date();
+  for(let i in msg){
+    if(msg[i].name.substring(0,1) === "a"){
+      let notifHour = parseInt(msg[i].time.substr(0, msg[i].time.length - 5))
+      let notifMinute = parseInt(msg[i].time.substring(msg[i].time.length-4, msg[i].time.length-2))
+      if(now.getHours() === notifHour && now.getMinutes() === notifMinute && now.getSeconds() === 1){
+        navigator.serviceWorker.ready.then(registration => {registration.showNotification('Sending Notification', {body:" Bitch"})})
+        console.log("send")
+      }
+    }
+   
+  }
+}, 1000);
+

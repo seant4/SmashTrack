@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Button, Container, Row, Col, Card } from 'react-bootstrap'
+import { Navbar, Button, Container, Card } from 'react-bootstrap'
 import List from '../list/List'
 
 function Routines(props){

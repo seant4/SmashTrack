@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
-import { Container, Button, Alert, Form, Col, InputGroup, FormControl, ButtonGroup} from "react-bootstrap"
+import { Container, Button, Form, Col, InputGroup, FormControl} from "react-bootstrap"
 
+import {setTimes} from "./notifManager.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
@@ -13,6 +13,7 @@ import "shards-ui/dist/css/shards.min.css";
 
 
 function Alerts(){
+    localStorage.setItem("notifFlag", false)
     const [toDoList, setToDoList] = useState([]);
 
     const [value, setValue] = useState(' ');
@@ -32,8 +33,19 @@ function Alerts(){
     },[])
 
     const handleSubmit = (e) => {
+        if(localStorage.getItem("notifFlag") === false){
+            Notification.requestPermission().then(function(result){
+                if(result === 'granted'){
+                    localStorage.setItem("notifFlag", true)
+                }
+                
+            })
+        }
+        //
+
         e.preventDefault();
         addToDo(value);
+        setTimes();
     };
     
     const addToDo = (text) => {
@@ -76,7 +88,7 @@ function Alerts(){
                             <Form.Control plaintext readOnly defaultValue={todo.text} />
                         </Col>
                             <Col>
-                                <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("a" + todo.text, todo.content)}} placeholder={todo.content} />
+                                <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("a" + todo.text, todo.content); setTimes(); }} placeholder={todo.content} />
                             </Col>
                         </Form.Row>
                     </Form>
