@@ -1,3 +1,6 @@
+importScripts('https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/7.16.1/firebase-messaging.js');
+
 var CACHE_NAME = 'pwa-task-manager';
 var urlsToCache = [
   '/',
@@ -46,14 +49,19 @@ self.addEventListener('activate', event => {
     })
   );
 });
+messaging.requestPermission()
+.then(function() {
+  console.log('Have permission');
+})
+.catch(function(err){
+  console.log('Error Occured.')
+})
 
-
+/*
 let msg = []
 self.addEventListener('message', event =>{
   msg = event.data
-  console.log("received: " + msg)
 })
-
 
 setInterval(()=>{
   let now = new Date();
@@ -62,11 +70,11 @@ setInterval(()=>{
       let notifHour = parseInt(msg[i].time.substr(0, msg[i].time.length - 5))
       let notifMinute = parseInt(msg[i].time.substring(msg[i].time.length-4, msg[i].time.length-2))
       if(now.getHours() === notifHour && now.getMinutes() === notifMinute && now.getSeconds() === 1){
-        navigator.serviceWorker.ready.then(registration => {registration.showNotification('Sending Notification', {body:" Bitch"})})
-        console.log("send")
+        self.registration.showNotification("Its time for your " + msg[i].substr(0, msg[i].time.length - 5) + " practice routine!",  {body:" Bitch"})
+        console.log("notification sent")
       }
     }
    
   }
 }, 1000);
-
+*/

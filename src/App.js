@@ -10,14 +10,15 @@ function App() {
   const [page, setPage] = useState("Dashboard");
 
   useEffect(()=>{
+    /*
     let notifs = [];
     for(let i in localStorage){
       if(i.substring(0,1) === "a"){
         notifs.push({name: i, time: localStorage.getItem(i)})
       }
     }
-    console.log("sending!")
     navigator.serviceWorker.controller.postMessage(notifs);
+    */
   }, []);
 
   if(page === "Routines"){
