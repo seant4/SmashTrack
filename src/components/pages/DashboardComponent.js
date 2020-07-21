@@ -92,7 +92,7 @@ function DashboardComponent(props){
                     Routines
                 </Button>
                 <Button  onClick={(e) => { props.onChange("Alerts") }} variant="secondary" size="lg" block>
-                    Alerts
+                    Notes
                 </Button>
                 <Button onClick={(e) => {handlePerformance(data, setData)}} variant="secondary" size="lg" block>
                     Performance

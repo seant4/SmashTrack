@@ -74,9 +74,9 @@ function Alerts(){
         <Container className='toDoInput'>
             <InputGroup className="mb-3">
                 <InputGroup.Prepend>
-                    <Button onClick={handleSubmit} variant="outline-secondary">Add new alert</Button>
+                    <Button onClick={handleSubmit} variant="outline-secondary">Add new note</Button>
                 </InputGroup.Prepend>
-                <FormControl placeholder={value} onChange={e => setValue(e.target.value)} aria-describedby="basic-addon1" placeholder="name your alert" />
+                <FormControl placeholder={value} onChange={e => setValue(e.target.value)} aria-describedby="basic-addon1" placeholder="Note name" />
             </InputGroup>
         <Container className='toDoList'>
         {
@@ -88,7 +88,7 @@ function Alerts(){
                             <Form.Control plaintext readOnly defaultValue={todo.text} />
                         </Col>
                             <Col>
-                                <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("a" + todo.text, todo.content); setTimes(); }} placeholder={todo.content} />
+                                <Form.Control as="textarea" rows="3" onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("a" + todo.text, todo.content); setTimes(); }} placeholder="My note">{todo.content}</Form.Control>
                             </Col>
                         </Form.Row>
                     </Form>
