@@ -98,7 +98,7 @@ function List(){
                         </Form>
                         <ButtonToolbar aria-label="Toolbar with button groups">
                             <ButtonGroup className="mr-2" aria-label="First group">
-                                <Button variant="secondary">Close</Button>
+                                <Button onClick={()=>{ onClose() }} variant="secondary">Close</Button>
                             </ButtonGroup>
                             <ButtonGroup className="mr-2" aria-label="Second group">
                                 <Button href={twitterShare}><img src={twitter} alt="Twitter" href={twitterShare} /></Button> <Button href={emailShare}><img src={gmail} alt="Email" /></Button>

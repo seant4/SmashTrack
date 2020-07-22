@@ -97,7 +97,7 @@ function DashboardComponent(props){
                 <Button onClick={(e) => {handlePerformance(data, setData)}} variant="secondary" size="lg" block>
                     Performance
                 </Button>
-                <Button variant="secondary" size="lg" block>
+                <Button onClick={(e)=> { props.onChange("Learn") }} variant="secondary" size="lg" block>
                     Learn
                 </Button>
             </Container>
