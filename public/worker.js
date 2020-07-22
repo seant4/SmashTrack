@@ -46,11 +46,3 @@ self.addEventListener('activate', event => {
     })
   );
 });
-messaging.requestPermission()
-.then(function() {
-  console.log('Have permission');
-})
-.catch(function(err){
-  console.log('Error Occured.')
-})
-
