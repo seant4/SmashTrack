@@ -4,12 +4,14 @@ import './List.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
-import { Container, Button, Alert, Form , InputGroup, FormControl, ButtonGroup} from "react-bootstrap"
-
+import { Container, Button, Form , InputGroup, FormControl, ButtonGroup, ButtonToolbar} from "react-bootstrap"
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 
+import twitter from "./twitter.png"
+import discord from "./discord.png"
+import gmail from "./gmail.png"
 
 
 
@@ -71,7 +73,7 @@ function List(){
                     <Form>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>My {todo.text} routine:</Form.Label>
-                        <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("r" + todo.text, todo.content)}} as="textarea" rows="15">{todo.content}</Form.Control>
+                        <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("r" + todo.text, todo.content)}} as="textarea" rows="15" spellcheck="false">{todo.content}</Form.Control>
                     </Form.Group>
                   </Form>
                   <Button onClick={() =>{ onClose() }}>Close</Button>
@@ -79,6 +81,33 @@ function List(){
               )
             }
           })
+    }
+
+    const handleShare = (todo) =>{
+        let twitterShare = "https://twitter.com/intent/tweet?text=" + todo.content;
+        let emailShare = "mailto:?subject=My " + todo.text + " routine&body=" + todo.content;
+        confirmAlert({
+            customUI: ({ onClose }) =>{
+                return (
+                    <div className='custrom-ui'>
+                        <h1>{todo.text} Raw Paste</h1>
+                        <Form>
+                            <Form.Group controlId="exampleForm.controlTextarea1">
+                                <Form.Control as="textarea" rows="15">{todo.content}</Form.Control>
+                            </Form.Group>
+                        </Form>
+                        <ButtonToolbar aria-label="Toolbar with button groups">
+                            <ButtonGroup className="mr-2" aria-label="First group">
+                                <Button variant="secondary">Close</Button>
+                            </ButtonGroup>
+                            <ButtonGroup className="mr-2" aria-label="Second group">
+                                <Button href={twitterShare}><img src={twitter} alt="Twitter" href={twitterShare} /></Button> <Button href={emailShare}><img src={gmail} alt="Email" /></Button>
+                            </ButtonGroup>
+                        </ButtonToolbar>
+                    </div>
+                )
+            }
+        })
     }
 
     return (
@@ -96,6 +125,7 @@ function List(){
                 <div key={index}>
                     <ButtonGroup style={{padding: "5px"}}>
                         <Button className="Routine" variant="primary" onClick= {() => handleRoutine(todo)} block>{todo.text}</Button>
+                        <Button variant="secondary" onClick= {() => handleShare(todo)}>Share</Button>
                         <Button variant="danger" onClick = {() => handleDelete(todo)}>Delete</Button>
                     </ButtonGroup>
                 </div>
