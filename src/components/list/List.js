@@ -9,6 +9,8 @@ import { Container, Button, Form , InputGroup, FormControl, ButtonGroup, ButtonT
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 
+import FileSaver, { saveAs } from 'file-saver';
+
 import twitter from "./twitter.png"
 import discord from "./discord.png"
 import gmail from "./gmail.png"
@@ -83,6 +85,12 @@ function List(){
           })
     }
 
+    const handleExport = (todo) =>{
+        let title = todo.text + "Routine.txt"
+        let blob = new Blob([todo.content], {type: "text/plain;charset=utf-8"});
+        FileSaver.saveAs(blob, title);
+    }
+
     const handleShare = (todo) =>{
         let twitterShare = "https://twitter.com/intent/tweet?text=" + todo.content;
         let emailShare = "mailto:?subject=My " + todo.text + " routine&body=" + todo.content;
@@ -98,10 +106,10 @@ function List(){
                         </Form>
                         <ButtonToolbar aria-label="Toolbar with button groups">
                             <ButtonGroup className="mr-2" aria-label="First group">
-                                <Button onClick={()=>{ onClose() }} variant="secondary">Close</Button>
+                                <Button onClick={()=>{onClose()}} variant="secondary">Close</Button>
                             </ButtonGroup>
                             <ButtonGroup className="mr-2" aria-label="Second group">
-                                <Button href={twitterShare}><img src={twitter} alt="Twitter" href={twitterShare} /></Button> <Button href={emailShare}><img src={gmail} alt="Email" /></Button>
+                                <Button href={twitterShare}><img src={twitter} alt="Twitter" href={twitterShare} /></Button> <Button href={emailShare}><img src={gmail} alt="Email" /></Button><Button onClick={(e)=> {handleExport(todo)}}>Export</Button>
                             </ButtonGroup>
                         </ButtonToolbar>
                     </div>
@@ -110,12 +118,34 @@ function List(){
         })
     }
 
+    const handleImport = () =>{
+        var input = document.createElement('input');
+        input.type = 'file';
+        input.onchange = e => { 
+            // getting a hold of the file reference
+            var file = e.target.files[0]; 
+            // setting up the reader
+            var reader = new FileReader();
+            reader.readAsText(file,'UTF-8');
+            // here we tell the reader what to do when it's done reading...
+            reader.onload = readerEvent => {
+            var content = readerEvent.target.result; // this is the content!
+            let text = {text: file.name.substr(0, file.name.length - 4), content: content}
+            const updatedToDoList = [...toDoList,  {text: file.name.substr(0, file.name.length - 4), content: content} ];
+            localStorage.setItem("r" + file.name.substr(0, file.name.length - 4), text.content )
+            setToDoList(updatedToDoList)
+            }
+        }
+        input.click();
+    }
+
     return (
         <>
         <Container className='toDoInput'>
             <InputGroup className="mb-3">
                 <InputGroup.Prepend>
                     <Button onClick={handleSubmit} variant="outline-secondary">Add new routine</Button>
+                    <Button onClick={(e) => {handleImport()}} variant="outline-secondary">Import</Button>
                 </InputGroup.Prepend>
                 <FormControl placeholder={value} onChange={e => setValue(e.target.value)} aria-describedby="basic-addon1" />
             </InputGroup>
