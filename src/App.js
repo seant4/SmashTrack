@@ -3,6 +3,7 @@ import Dashboard from './components/pages/DashboardComponent'
 import Routines from './components/pages/RoutinesComponent'
 import Alerts from './components/pages/alerts'
 import Learn from './components/pages/learn'
+import About from './components/pages/about'
 
 import './App.css';
 
@@ -27,6 +28,12 @@ function App() {
       return(
         <div className="App">
           <Alerts page={page} onChange={(value) =>{setPage(value)}} />
+        </div>
+      );
+    }else if(page === "About"){
+      return(
+        <div className="App">
+          <About page={page} onChange={(value) =>{setPage(value)}} />
         </div>
       );
     }else{

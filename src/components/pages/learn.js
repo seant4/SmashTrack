@@ -8,6 +8,11 @@ function Learn(props){
         <>
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand>Learn</Navbar.Brand>
+                <Navbar.Collapse className="justify-content-end">
+                  <Navbar.Text>
+                      <Button onClick={(e) => {props.onChange("About")}}>About</Button>
+                  </Navbar.Text>
+              </Navbar.Collapse>
             </Navbar>
             <Container style={{padding:"1em"}}>
                 <Button onClick={(e) => { props.onChange("App") }} variant="secondary">Back</Button>

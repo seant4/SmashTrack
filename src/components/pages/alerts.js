@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Button, Container, Row, Col, Card } from 'react-bootstrap'
+import { Navbar, Button, Container, Row, Col, Card, Form, FormControl } from 'react-bootstrap'
 import AlertList from '../alerts/Alerts'
 
 function Alerts(props){
@@ -7,6 +7,11 @@ function Alerts(props){
         <>
         <Navbar bg="dark" variant="dark">
             <Navbar.Brand>Notes</Navbar.Brand>
+            <Navbar.Collapse className="justify-content-end">
+                <Navbar.Text>
+                    <Button onClick={(e) => {props.onChange("About")}}>About</Button>
+                </Navbar.Text>
+            </Navbar.Collapse>
         </Navbar>
         <Container style={{padding:"1em"}}>
             <Button onClick={(e) => { props.onChange("App") }} variant="secondary">Back</Button>
