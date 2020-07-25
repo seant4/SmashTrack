@@ -147,7 +147,7 @@ function List(){
                     <Button onClick={handleSubmit} variant="outline-secondary">Add new routine</Button>
                     <Button onClick={(e) => {handleImport()}} variant="outline-secondary">Import</Button>
                 </InputGroup.Prepend>
-                <FormControl placeholder={value} onChange={e => setValue(e.target.value)} aria-describedby="basic-addon1" />
+                <FormControl placeholder="Name" onChange={e => setValue(e.target.value)} aria-describedby="basic-addon1" />
             </InputGroup>
         <Container className='toDoList'>
         {
