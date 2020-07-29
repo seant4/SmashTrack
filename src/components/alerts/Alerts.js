@@ -82,16 +82,19 @@ function Alerts(){
         {
             toDoList.map((todo, index) => (
                 <div key={index}>
+                    <InputGroup>
                     <Form>
                         <Form.Row>
-                        <Col>
+                        <Col xs={6}>
                             <Form.Control plaintext readOnly defaultValue={todo.text} />
+                            <Button variant="danger" onClick={((e) => {handleDelete(todo);})}>Delete</Button>  
                         </Col>
-                            <Col>
-                                <Form.Control as="textarea" rows="3" onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("a" + todo.text, todo.content); setTimes(); }} placeholder="My note">{todo.content}</Form.Control>
-                            </Col>
+                        <Col>
+                            <Form.Control as="textarea" rows="3" columns="8" onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("a" + todo.text, todo.content); setTimes(); }} placeholder="My note">{(todo.content === undefined || todo.content === "undefined") ? "My note" : todo.content}</Form.Control>
+                        </Col>
                         </Form.Row>
                     </Form>
+                    </InputGroup>
                 </div>
             ))
         }
