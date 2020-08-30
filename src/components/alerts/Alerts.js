@@ -74,7 +74,7 @@ function Alerts(){
         <Container className='toDoInput'>
             <InputGroup className="mb-3">
                 <InputGroup.Prepend>
-                    <Button onClick={handleSubmit} variant="outline-secondary">Add new note</Button>
+                    <Button onClick={handleSubmit} variant="outline-secondary">+</Button>
                 </InputGroup.Prepend>
                 <FormControl placeholder={value} onChange={e => setValue(e.target.value)} aria-describedby="basic-addon1" placeholder="Note name" />
             </InputGroup>
@@ -86,7 +86,7 @@ function Alerts(){
                     <Form>
                         <Form.Row>
                         <Col xs={6}>
-                            <Form.Control plaintext readOnly defaultValue={todo.text} />
+                            <Form.Control readOnly defaultValue={todo.text}/>
                             <Button variant="danger" onClick={((e) => {handleDelete(todo);})}>Delete</Button>  
                         </Col>
                         <Col>

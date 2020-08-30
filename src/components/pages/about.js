@@ -33,14 +33,6 @@ function About(props){
                             </Card.Text>
                           </Card.Body>
                         </Card>
-                        <Card>
-                          <Card.Body>
-                            <Card.Title>Art</Card.Title>
-                            <Card.Text>
-                                JoshyWoshy, Cactus, Leen, Quill all worked as Project Organizers. The functions, systems and features of the app where all developed with the Project Organizers
-                            </Card.Text>
-                          </Card.Body>
-                        </Card>
                     </CardDeck>
         </>
     );

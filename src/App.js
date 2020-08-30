@@ -4,6 +4,7 @@ import Routines from './components/pages/RoutinesComponent'
 import Alerts from './components/pages/alerts'
 import Learn from './components/pages/learn'
 import About from './components/pages/about'
+import Matchup from './components/pages/matchup'
 
 import './App.css';
 
@@ -36,6 +37,12 @@ function App() {
           <About page={page} onChange={(value) =>{setPage(value)}} />
         </div>
       );
+      }else if(page === "Matchups"){
+        return(
+          <div className="App">
+            <Matchup page={page} onChange={(value) => {setPage(value)}} />
+          </div>
+        )
     }else{
       return (
         <div className="App">

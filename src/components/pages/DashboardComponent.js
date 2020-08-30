@@ -105,6 +105,9 @@ function DashboardComponent(props){
                 <Button onClick={(e)=> { props.onChange("Learn") }} variant="secondary" size="lg" block>
                     Learn
                 </Button>
+                <Button onClick={(e)=> { props.onChange("Matchups") }} variant="secondary" size="lg" block>
+                    Matchups
+                </Button>
             </Container>
         </>
     );
