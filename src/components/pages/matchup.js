@@ -63,11 +63,13 @@ function Matchup(props){
                     Object.entries(matchUpList).map((char, index) => (
                         <div key={index}>
                             <ListGroup style={{padding: "5px"}}>
-                                <ListGroup horizontal>
+                                <ListGroup>
                                     <ListGroupItem block>{char[0]}</ListGroupItem>
-                                    <ListGroupItem block><Button variant="outline-primary" onClick={(e) => handleAdd(char[0], char[1])}>+</Button></ListGroupItem>
-                                    <ListGroupItem block>{char[1]}</ListGroupItem>
-                                    <ListGroupItem><Button variant="outline-danger" onClick={(e) => {handleSubtract(char[0], char[1])}}>-</Button></ListGroupItem>
+                                    <ListGroup style={{display: "flex", justifyContent: "center", alignItems: "center"}} horizontal block>
+                                        <ListGroupItem block><Button variant="outline-primary" onClick={(e) => handleAdd(char[0], char[1])}>+</Button></ListGroupItem>
+                                        <ListGroupItem block>{char[1]}</ListGroupItem>
+                                        <ListGroupItem><Button variant="outline-danger" onClick={(e) => {handleSubtract(char[0], char[1])}}>-</Button></ListGroupItem>
+                                    </ListGroup>
                                 </ListGroup>
                             </ListGroup>
                         </div>
