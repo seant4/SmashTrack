@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 
-import { Navbar, Button, Container, Row, Col, Form , InputGroup, FormControl, ButtonGroup, Card } from 'react-bootstrap'
+import { Navbar, Button, Container, Row, Col, Form , InputGroup, FormControl, ButtonGroup, Card, ListGroup } from 'react-bootstrap'
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
@@ -53,7 +53,11 @@ function handleClose(name, result, data, setData){
 function DashboardComponent(props){
     const [data, setData] = useState([])
     const [matchupToLearn, setMatchupToLearn] = useState ('');
+    const [trending, setTrending] = useState({})
     useEffect(()=>{
+        //Fetch trending data
+        fetch('http://104.131.86.238:8000/api/meta').then(response => response.json()).then(dat => setTrending(dat));
+        //Load custom matchup
         if(localStorage.getItem('MatchupToLearn') === null || localStorage.getItem('MatchupToLearn') === "null"){
             setMatchupToLearn("Nothing yet!")
         }else{
@@ -70,6 +74,7 @@ function DashboardComponent(props){
         }
         setData(temp)
     },[])
+    console.log(trending["Trending Melee Character: "])
     return(
         <>
             <Navbar bg="dark" variant="dark">
@@ -99,12 +104,18 @@ function DashboardComponent(props){
             </LineChart>
             <br></br>
 
-            <Card style={{width : '18rem', position: "relative", padding: "5px", margin: "0 auto"}}>
+            <Card style={{width : '22rem', position: "relative", padding: "5px", margin: "0 auto"}}>
                 <Card.Body>
                     <Card.Title>{matchupToLearn}</Card.Title>
                     <Card.Text>
                         blahblad
                     </Card.Text>
+                    <ListGroup>
+                        <ListGroup.Item>Trending Ultimate Character: {trending["Trending Ultimate Character: "]}</ListGroup.Item>
+                        <ListGroup.Item>Trending Ultimate Player: {trending["Trending Ultimate Player: "]}</ListGroup.Item>
+                        <ListGroup.Item>Trending Melee Character: {trending["Trending Melee Character: "]}</ListGroup.Item>
+                        <ListGroup.Item>Trending Melee Player: {trending["Trending Melee Player: "]}</ListGroup.Item>
+                    </ListGroup>
                 </Card.Body>
             </Card>
 
@@ -113,7 +124,7 @@ function DashboardComponent(props){
                 <Button  onClick={(e) => { props.onChange("Routines") }} variant="secondary" size="lg" block>
                     Routines
                 </Button>
-                <Button  onClick={(e) => { props.onChange("Alerts") }} variant="secondary" size="lg" block>
+                <Button  onClick={(e) => { props.onChange("Notes") }} variant="secondary" size="lg" block>
                     Notes
                 </Button>
                 <Button onClick={(e) => {handlePerformance(data, setData)}} variant="secondary" size="lg" block>

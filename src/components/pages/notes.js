@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navbar, Button, Container, Row, Col, Card, Form, FormControl } from 'react-bootstrap'
-import AlertList from '../alerts/Alerts'
+import NotesList from '../notes/NotesList'
 
-function Alerts(props){
+function Notes(props){
     return(
         <>
         <Navbar bg="dark" variant="dark">
@@ -18,11 +18,11 @@ function Alerts(props){
         </Container>
         <Container style={{padding: "2em"}}>
             <Card style={{padding: "8px"}}>
-                <AlertList style={{padding: "5px"}} />
+                <NotesList style={{padding: "5px"}} />
             </Card>
         </Container>
         </>
     );
 }
 
-export default Alerts;
+export default Notes;

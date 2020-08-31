@@ -4,7 +4,6 @@ import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 import { Container, Button, Form, Col, InputGroup, FormControl} from "react-bootstrap"
 
-import {setTimes} from "./notifManager.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
@@ -12,7 +11,7 @@ import "shards-ui/dist/css/shards.min.css";
 
 
 
-function Alerts(){
+function NotesList(){
     localStorage.setItem("notifFlag", false)
     const [toDoList, setToDoList] = useState([]);
 
@@ -33,19 +32,8 @@ function Alerts(){
     },[])
 
     const handleSubmit = (e) => {
-        if(localStorage.getItem("notifFlag") === false){
-            Notification.requestPermission().then(function(result){
-                if(result === 'granted'){
-                    localStorage.setItem("notifFlag", true)
-                }
-                
-            })
-        }
-        //
-
         e.preventDefault();
         addToDo(value);
-        setTimes();
     };
     
     const addToDo = (text) => {
@@ -68,7 +56,6 @@ function Alerts(){
         }
     };
 
-
     return (
         <>
         <Container className='toDoInput'>
@@ -78,19 +65,19 @@ function Alerts(){
                 </InputGroup.Prepend>
                 <FormControl placeholder={value} onChange={e => setValue(e.target.value)} aria-describedby="basic-addon1" placeholder="Note name" />
             </InputGroup>
-        <Container className='toDoList'>
+        <Container  className='toDoList'>
         {
             toDoList.map((todo, index) => (
                 <div key={index}>
-                    <InputGroup>
-                    <Form>
+                    <InputGroup style={{position: "relative", padding: "5px", margin: "0 auto"}}>
+                    <Form style={{position: "relative", padding: "5px", margin: "0 auto"}}>
                         <Form.Row>
                         <Col xs={6}>
                             <Form.Control readOnly defaultValue={todo.text}/>
-                            <Button variant="danger" onClick={((e) => {handleDelete(todo);})}>Delete</Button>  
+                            <div style={{padding: "5px"}} ><Button variant="danger"  onClick={((e) => {handleDelete(todo);})}>Delete</Button></div>  
                         </Col>
                         <Col>
-                            <Form.Control as="textarea" rows="3" columns="8" onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("a" + todo.text, todo.content); setTimes(); }} placeholder="My note">{(todo.content === undefined || todo.content === "undefined") ? "My note" : todo.content}</Form.Control>
+                            <Form.Control as="textarea" rows="3" columns="8" onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("a" + todo.text, todo.content); }} placeholder="My note">{(todo.content === undefined || todo.content === "undefined") ? "My note" : todo.content}</Form.Control>
                         </Col>
                         </Form.Row>
                     </Form>
@@ -104,4 +91,4 @@ function Alerts(){
     );
 }
 
-export default Alerts
+export default NotesList

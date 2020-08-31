@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import Dashboard from './components/pages/DashboardComponent'
 import Routines from './components/pages/RoutinesComponent'
-import Alerts from './components/pages/alerts'
+import Notes from './components/pages/notes'
 import Learn from './components/pages/learn'
 import About from './components/pages/about'
 import Matchup from './components/pages/matchup'
@@ -25,10 +25,10 @@ function App() {
         <Learn page={page} onChange={(value) =>{setPage(value)}} />
       </div>
     )
-    }else if(page === "Alerts"){
+    }else if(page === "Notes"){
       return(
         <div className="App">
-          <Alerts page={page} onChange={(value) =>{setPage(value)}} />
+          <Notes page={page} onChange={(value) =>{setPage(value)}} />
         </div>
       );
     }else if(page === "About"){
