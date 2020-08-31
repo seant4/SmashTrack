@@ -14,7 +14,7 @@ function Matchup(props){
             localStorage.setItem('Matchups', JSON.stringify(charJson))
             setMatchUpList(JSON.parse(localStorage.getItem('Matchups')));
             localStorage.setItem('MatchUpFlag', 'true');
-            localStorage.setITem('MatchupToLearn', 'Nothing yet')
+            localStorage.setItem('MatchupToLearn', 'Nothing yet')
         }else{
             setMatchUpList(JSON.parse(localStorage.getItem('Matchups')));
         }
@@ -52,12 +52,16 @@ function Matchup(props){
         let tmpName ="";
         let tmpNum = 0
         for(const property in matchUpList){
-            if(matchUpList[property] > tmpNum){
+            if(matchUpList[property] < tmpNum){
                 tmpName = property;
                 tmpNum = matchUpList[property]
             }
         }
-        localStorage.setItem('MatchupToLearn', tmpName);
+        if(tmpName !== ""){
+            localStorage.setItem('MatchupToLearn', tmpName);
+        }else{
+            localStorage.setItem('MatchupToLearn', null)
+        }
     }
 
     return(

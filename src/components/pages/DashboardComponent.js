@@ -54,7 +54,7 @@ function DashboardComponent(props){
     const [data, setData] = useState([])
     const [matchupToLearn, setMatchupToLearn] = useState ('');
     useEffect(()=>{
-        if(localStorage.getItem('MatchupToLearn') === null){
+        if(localStorage.getItem('MatchupToLearn') === null || localStorage.getItem('MatchupToLearn') === "null"){
             setMatchupToLearn("Nothing yet!")
         }else{
             setMatchupToLearn("You should look into the " + localStorage.getItem('MatchupToLearn') + " matchup");
