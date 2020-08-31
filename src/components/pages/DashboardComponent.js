@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 
-import { Navbar, Button, Container, Row, Col, Form , InputGroup, FormControl, ButtonGroup } from 'react-bootstrap'
+import { Navbar, Button, Container, Row, Col, Form , InputGroup, FormControl, ButtonGroup, Card } from 'react-bootstrap'
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
@@ -52,7 +52,13 @@ function handleClose(name, result, data, setData){
 
 function DashboardComponent(props){
     const [data, setData] = useState([])
+    const [matchupToLearn, setMatchupToLearn] = useState ('');
     useEffect(()=>{
+        if(localStorage.getItem('MatchupToLearn') === null){
+            setMatchupToLearn("Nothing yet!")
+        }else{
+            setMatchupToLearn("You should look into the " + localStorage.getItem('MatchupToLearn') + " matchup");
+        }
         let temp = []
         for(let i in localStorage){
             if(localStorage.getItem(i) !== null){
@@ -92,7 +98,18 @@ function DashboardComponent(props){
                 <Line type="monotone" dataKey="event" stroke="#82ca9d" />
             </LineChart>
             <br></br>
-            <Container>
+
+            <Card style={{width : '18rem', position: "relative", padding: "5px", margin: "0 auto"}}>
+                <Card.Body>
+                    <Card.Title>{matchupToLearn}</Card.Title>
+                    <Card.Text>
+                        blahblad
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+
+            <br></br>
+            <Container style={{padding: '2em'}}>
                 <Button  onClick={(e) => { props.onChange("Routines") }} variant="secondary" size="lg" block>
                     Routines
                 </Button>

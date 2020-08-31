@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Navbar, Button, Container, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Navbar, Button, Container, ListGroup, ListGroupItem, Card } from 'react-bootstrap'
 import charJson from '../../json/fighter.json';
 import useForceUpdate from 'use-force-update';
 
@@ -14,6 +14,7 @@ function Matchup(props){
             localStorage.setItem('Matchups', JSON.stringify(charJson))
             setMatchUpList(JSON.parse(localStorage.getItem('Matchups')));
             localStorage.setItem('MatchUpFlag', 'true');
+            localStorage.setITem('MatchupToLearn', 'Nothing yet')
         }else{
             setMatchUpList(JSON.parse(localStorage.getItem('Matchups')));
         }
@@ -30,6 +31,7 @@ function Matchup(props){
         setMatchUpList(upDate);
         localStorage.setItem('Matchups', JSON.stringify(matchUpList))
         forceUpdate();
+        handleMatchup();
     }
 
     const handleSubtract = (name, value) =>{
@@ -43,6 +45,19 @@ function Matchup(props){
         setMatchUpList(upDate);
         localStorage.setItem('Matchups', JSON.stringify(matchUpList));
         forceUpdate();
+        handleMatchup();
+    }
+
+    const handleMatchup = () =>{
+        let tmpName ="";
+        let tmpNum = 0
+        for(const property in matchUpList){
+            if(matchUpList[property] > tmpNum){
+                tmpName = property;
+                tmpNum = matchUpList[property]
+            }
+        }
+        localStorage.setItem('MatchupToLearn', tmpName);
     }
 
     return(
@@ -59,22 +74,32 @@ function Matchup(props){
                 <Button onClick={(e) => { props.onChange("App") }} variant="secondary">Back</Button>
             </Container>
             <Container style={{padding: "2em"}}>
-                {
+                <Card style={{ width: '20rem', position: "relative", padding: "5px", margin: "0 auto"}}>
+                <Card.Img variant="top" />
+                <Card.Body>
+                    <Card.Title>Record your matchup records</Card.Title>
+                    <Card.Text>
+                        Record each win (+) and loss (-) for each character below, we'll decide what the best matchup for you to learn based on your win rates as well as the meta
+                    </Card.Text>
+                    {
                     Object.entries(matchUpList).map((char, index) => (
                         <div key={index}>
                             <ListGroup style={{padding: "5px"}}>
                                 <ListGroup>
                                     <ListGroupItem block>{char[0]}</ListGroupItem>
                                     <ListGroup style={{display: "flex", justifyContent: "center", alignItems: "center"}} horizontal block>
-                                        <ListGroupItem block><Button variant="outline-primary" onClick={(e) => handleAdd(char[0], char[1])}>+</Button></ListGroupItem>
+                                        <ListGroupItem block><Button variant="primary" onClick={(e) => handleAdd(char[0], char[1])}>+</Button></ListGroupItem>
                                         <ListGroupItem block>{char[1]}</ListGroupItem>
-                                        <ListGroupItem><Button variant="outline-danger" onClick={(e) => {handleSubtract(char[0], char[1])}}>-</Button></ListGroupItem>
+                                        <ListGroupItem><Button variant="danger" onClick={(e) => {handleSubtract(char[0], char[1])}}>-</Button></ListGroupItem>
                                     </ListGroup>
                                 </ListGroup>
                             </ListGroup>
                         </div>
                     ))
-                }
+                    }
+                </Card.Body>
+                
+                </Card>
             </Container> 
         </>
     )
