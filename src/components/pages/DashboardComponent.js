@@ -10,6 +10,7 @@ import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   } from 'recharts';
 
+import dat from '../../json/trending.json';
 
 
 function handlePerformance(data, setData){
@@ -55,8 +56,7 @@ function DashboardComponent(props){
     const [matchupToLearn, setMatchupToLearn] = useState ('');
     const [trending, setTrending] = useState({})
     useEffect(()=>{
-        //Fetch trending data
-        fetch('http://104.131.86.238:8000/api/meta').then(response => response.json()).then(dat => setTrending(dat));
+        setTrending(dat);
         //Load custom matchup
         if(localStorage.getItem('MatchupToLearn') === null || localStorage.getItem('MatchupToLearn') === "null"){
             setMatchupToLearn("Nothing yet!")
@@ -107,9 +107,6 @@ function DashboardComponent(props){
             <Card style={{width : '22rem', position: "relative", padding: "5px", margin: "0 auto"}}>
                 <Card.Body>
                     <Card.Title>{matchupToLearn}</Card.Title>
-                    <Card.Text>
-                        blahblad
-                    </Card.Text>
                     <ListGroup>
                         <ListGroup.Item>Trending Ultimate Character: {trending["Trending Ultimate Character: "]}</ListGroup.Item>
                         <ListGroup.Item>Trending Ultimate Player: {trending["Trending Ultimate Player: "]}</ListGroup.Item>
