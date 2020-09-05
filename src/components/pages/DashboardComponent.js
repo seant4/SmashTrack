@@ -6,6 +6,14 @@ import { Navbar, Button, Container, Row, Col, Form , InputGroup, FormControl, Bu
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
+import trendingLogo from '../../assets/trending.png'
+import swordLogo from '../../assets/sword.png'
+import routinesLogo from '../../assets/routinesLogo.png'
+import notesLogo from '../../assets/notesLogo.png'
+import performanceLogo from  '../../assets/performanceLogo.png'
+import matchupLogo from '../../assets/matchupLogo.png'
+import learnLogo from '../../assets/learnLogo.png'
+
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   } from 'recharts';
@@ -29,11 +37,21 @@ function handlePerformance(data, setData){
                     <Form.Control placeholder="Result in Fraction form EX: 7/41" onChange={(e)=> {result=e.target.value}} />
                 </Form.Group>
               </Form>
-              <Button onClick={() => {handleClose(name, result, data, setData); onClose()}} > Close </Button>
+              <Button onClick={() => {handleClose(name, result, data, setData); onClose()}} > Add </Button>
+              <p></p>
+              <Button onClick={() => {setData([]); handleErase(); onClose()}}>Erase Data</Button>
             </div>
           )
         }
       })
+}
+
+function handleErase(){
+    for(let i in localStorage){
+        if(i.substr(0,1) === "p"){
+            localStorage.removeItem(i)
+        }
+    }
 }
 
 function handleClose(name, result, data, setData){
@@ -106,8 +124,11 @@ function DashboardComponent(props){
 
             <Card style={{width : '22rem', position: "relative", padding: "5px", margin: "0 auto"}}>
                 <Card.Body>
+                    <img style={{width: '15%'}} src={swordLogo} />
+                    <br></br>
                     <Card.Title>{matchupToLearn}</Card.Title>
                     <ListGroup>
+                        <ListGroup.Item><img src={trendingLogo} style={{width: '30%'}}/></ListGroup.Item>
                         <ListGroup.Item>Trending Ultimate Character: {trending["Trending Ultimate Character: "]}</ListGroup.Item>
                         <ListGroup.Item>Trending Ultimate Player: {trending["Trending Ultimate Player: "]}</ListGroup.Item>
                         <ListGroup.Item>Trending Melee Character: {trending["Trending Melee Character: "]}</ListGroup.Item>
@@ -119,19 +140,19 @@ function DashboardComponent(props){
             <br></br>
             <Container style={{padding: '2em'}}>
                 <Button  onClick={(e) => { props.onChange("Routines") }} variant="secondary" size="lg" block>
-                    Routines
+                    <img style={{width: '5%'}} src={routinesLogo} /> Routines
                 </Button>
                 <Button  onClick={(e) => { props.onChange("Notes") }} variant="secondary" size="lg" block>
-                    Notes
+                    <img style={{width: '5%'}} src={notesLogo} /> Notes
                 </Button>
                 <Button onClick={(e) => {handlePerformance(data, setData)}} variant="secondary" size="lg" block>
-                    Performance
-                </Button>
-                <Button onClick={(e)=> { props.onChange("Learn") }} variant="secondary" size="lg" block>
-                    Learn
+                    <img style={{width: '5%'}} src={performanceLogo} /> Performance
                 </Button>
                 <Button onClick={(e)=> { props.onChange("Matchups") }} variant="secondary" size="lg" block>
-                    Matchups
+                    <img style={{width: '5%'}} src={matchupLogo} /> Matchups
+                </Button>
+                <Button onClick={(e)=> { props.onChange("Learn") }} variant="secondary" size="lg" block>
+                    <img style={{width: '5%'}} src={learnLogo} /> Learn
                 </Button>
             </Container>
         </>
