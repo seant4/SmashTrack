@@ -104,22 +104,6 @@ function DashboardComponent(props){
                 </Navbar.Collapse>
             </Navbar>
 
-            <LineChart
-                width={300}
-                height={150}
-                data={data}
-                margin={{
-                    top: 5, right: 0, left: 0, bottom: 5,
-                }}
-                style={{position: "relative", padding: "5px", margin: "0 auto"}}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis reversed/>
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="event" stroke="#82ca9d" />
-            </LineChart>
             <br></br>
 
             <Card style={{width : '22rem', position: "relative", padding: "5px", margin: "0 auto"}}>
@@ -144,9 +128,6 @@ function DashboardComponent(props){
                 </Button>
                 <Button  onClick={(e) => { props.onChange("Notes") }} variant="secondary" size="lg" block>
                     <img style={{width: '5%'}} src={notesLogo} /> Notes
-                </Button>
-                <Button onClick={(e) => {handlePerformance(data, setData)}} variant="secondary" size="lg" block>
-                    <img style={{width: '5%'}} src={performanceLogo} /> Performance
                 </Button>
                 <Button onClick={(e)=> { props.onChange("Matchups") }} variant="secondary" size="lg" block>
                     <img style={{width: '5%'}} src={matchupLogo} /> Matchups
