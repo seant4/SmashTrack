@@ -1,0 +1,6 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target" : { "namespace": "android_app", "package_name": "app.web.smashtrack_b1e21.twa",
+                   "sha256_cert_fingerprints": ["F3:CF:81:BA:1F:2B:B8:02:34:59:BA:DE:A6:DE:6E:D1:D0:A7:3C:7E:02:26:14:2A:C4:CD:A1:8B:BF:55:F0:19",
+                        "82:A9:4B:01:0A:AE:2C:EB:24:0D:58:89:59:5B:01:49:29:A9:DA:59:FB:7B:0B:06:91:8C:CE:CC:FE:86:1B:DD"] }
+    }]

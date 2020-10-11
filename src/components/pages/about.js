@@ -21,7 +21,7 @@ function About(props){
                     <Card.Body>
                         <Card.Title>Project Lead</Card.Title>
                         <Card.Text>
-                            SmashTrack was developed by Sean "NCSha" Theisen. He is an Smash Ultimate and Melee player. NCSha is the lead developer of SmashTrack
+                            SmashTrack was developed by Sean "NCSha" Theisen.Sean is an Smash Ultimate and Melee player. Sean is the lead developer of SmashTrack
                         </Card.Text>
                         </Card.Body>
                         </Card>

@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
-import { Container, Button, Form, Col, InputGroup, FormControl} from "react-bootstrap"
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+
+import { Container, Button, Form, Col, InputGroup, FormControl, ButtonGroup} from "react-bootstrap"
 
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -56,6 +59,24 @@ function NotesList(){
         }
     };
 
+    const handleRoutine = (todo) =>{
+        confirmAlert({
+            customUI: ({ onClose }) => {
+              return (
+                <div className='custom-ui'>
+                    <h1>{todo.text} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; </h1>
+                    <Form>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Control onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("a" + todo.text, todo.content)}} as="textarea" rows="15" columns="55" spellcheck="false">{todo.content}</Form.Control>
+                    </Form.Group>
+                  </Form>
+                  <Button onClick={() =>{ onClose() }}>Close</Button>
+                </div>
+              )
+            }
+          })
+    }
+
     return (
         <>
         <Container className='toDoInput'>
@@ -69,19 +90,10 @@ function NotesList(){
         {
             toDoList.map((todo, index) => (
                 <div key={index}>
-                    <InputGroup style={{position: "relative", padding: "5px", margin: "0 auto"}}>
-                    <Form style={{position: "relative", padding: "5px", margin: "0 auto"}}>
-                        <Form.Row>
-                        <Col xs={6}>
-                            <Form.Control readOnly defaultValue={todo.text}/>
-                            <div style={{padding: "5px"}} ><Button variant="danger"  onClick={((e) => {handleDelete(todo);})}>Delete</Button></div>  
-                        </Col>
-                        <Col>
-                            <Form.Control as="textarea" rows="3" columns="8" onChange={(e)=>{todo.content=e.target.value; localStorage.setItem("a" + todo.text, todo.content); }} placeholder="My note">{(todo.content === undefined || todo.content === "undefined") ? "My note" : todo.content}</Form.Control>
-                        </Col>
-                        </Form.Row>
-                    </Form>
-                    </InputGroup>
+                    <ButtonGroup style={{padding: "5px"}}>
+                        <Button className="Routine" variant="info" onClick= {() => handleRoutine(todo)} block>{todo.text}</Button>                        
+                        <Button variant="danger" onClick = {() => handleDelete(todo)}>Delete</Button>
+                    </ButtonGroup>
                 </div>
             ))
         }
