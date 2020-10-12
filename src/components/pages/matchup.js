@@ -16,7 +16,16 @@ function Matchup(props){
             localStorage.setItem('MatchUpFlag', 'true');
             localStorage.setItem('MatchupToLearn', 'Nothing yet')
         }else{
-            setMatchUpList(JSON.parse(localStorage.getItem('Matchups')));
+            //steve update
+            if(localStorage.getItem('SteveFlag') != 'true'){
+                let tmp = JSON.parse(localStorage.getItem('Matchups'));
+                tmp = Object.assign({'Steve': 0}, tmp);
+                localStorage.setItem('Matchups', JSON.stringify(tmp));
+                localStorage.setItem('SteveFlag', 'true');
+                setMatchUpList(JSON.parse(localStorage.getItem('Matchups')));
+            }else{
+                setMatchUpList(JSON.parse(localStorage.getItem('Matchups')));
+            }
         }
     }, [])
 
